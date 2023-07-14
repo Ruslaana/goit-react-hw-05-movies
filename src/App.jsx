@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  // eslint-disable-next-line
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async (results) => {
