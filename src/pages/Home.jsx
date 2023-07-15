@@ -7,11 +7,11 @@ const Home = () => {
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {
-    const fetchTrandingMovies = async () => {
+    const fetchTrendingMovies = async () => {
       const trendingMovies = await getTrendingMovies();
       setMovie(trendingMovies);
     };
-    fetchTrandingMovies();
+    fetchTrendingMovies();
   }, []);
 
   return (
@@ -28,8 +28,8 @@ const Home = () => {
   );
 };
 
-Home.prototype = {
-  movies: PropTypes.arrayOf(
+Home.propTypes = {
+  movie: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
