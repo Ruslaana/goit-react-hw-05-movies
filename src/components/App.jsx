@@ -11,8 +11,8 @@ function App() {
   return (
     <div>
       <nav>
-        <NavLink to="/" activeclassname="active">Home</NavLink>
-        <NavLink to="/movies" activeclassname="active">Movies</NavLink>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/movies">Movies</NavLink>
         <Outlet />
       </nav>
 
