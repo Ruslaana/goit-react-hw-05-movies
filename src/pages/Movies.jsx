@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { searchMovies } from '../api/movieApi';
+import { searchMovies } from '../services/movieApi';
 import MovieItem from '../components/MovieItem/MovieItem';
 
 const Movies = ({ searchTerm, searchResults, handleSearch, setSearchTerm }) => {

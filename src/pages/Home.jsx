@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getTrendingMovies } from '../api/movieApi';
+import { getTrendingMovies } from '../services/movieApi';
 import MovieItem from '../components/MovieItem/MovieItem';
 
 const Home = () => {
