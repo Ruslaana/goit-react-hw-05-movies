@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { getMovieDetails, getMovieCredits, getMovieReviews } from '../api/movieApi';
 import CastItem from '../components/CastItem';
 import { useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
-  const match = useParams();
-  const movieId = match.params.movieId;
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -63,12 +62,8 @@ const MovieDetails = () => {
   );
 };
 
-MovieDetails.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      movieId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
+// MovieDetails.propTypes = {
+//   movieId: PropTypes.string.isRequired,
+// };
 
 export default MovieDetails;
