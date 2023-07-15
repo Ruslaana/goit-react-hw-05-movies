@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { searchMovies } from '../api/movieApi';
-import MovieItem from '../components/MovieItem';
+import MovieItem from '../components/MovieItem/MovieItem';
 
 const Movies = ({ searchTerm, searchResults, handleSearch, setSearchTerm }) => {
   const handleClick = async () => {

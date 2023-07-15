@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getTrendingMovies } from '../api/movieApi';
-import MovieItem from '../components/MovieItem';
+import MovieItem from '../components/MovieItem/MovieItem';
 
 const Home = () => {
   const [movie, setMovie] = useState([]);

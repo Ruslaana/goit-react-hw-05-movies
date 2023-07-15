@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import { getMovieDetails, getMovieCredits, getMovieReviews } from '../api/movieApi';
-import CastItem from '../components/CastItem';
-import { useParams } from 'react-router-dom';
+import CastItem from '../components/CastItem/CastItem';
 
-const MovieDetails = () => {
-  const { movieId } = useParams();
+const MovieDetails = ({ match }) => {
+  const { movieId } = match.params;
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -31,39 +29,35 @@ const MovieDetails = () => {
     fetchMovieReviews();
   }, [movieId]);
 
+  if (!movie) {
+    return null;
+  }
+
   return (
     <div>
-      {movie && (
-        <div>
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
+      <h1>{movie.title}</h1>
+      <p>{movie.overview}</p>
 
-          <h2>Cast</h2>
-          <ul>
-            {cast.map((actor) => (
-              <li key={actor.id}>
-                <CastItem actor={actor} />
-              </li>
-            ))}
-          </ul>
+      <h2>Cast</h2>
+      <ul>
+        {cast.map((actor) => (
+          <li key={actor.id}>
+            <CastItem actor={actor} />
+          </li>
+        ))}
+      </ul>
 
-          <h2>Reviews</h2>
-          <ul>
-            {reviews.map((review) => (
-              <li key={review.id}>
-                <p>{review.content}</p>
-                <p>Author: {review.author}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <h2>Reviews</h2>
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <p>{review.content}</p>
+            <p>Author: {review.author}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-
-// MovieDetails.propTypes = {
-//   movieId: PropTypes.string.isRequired,
-// };
 
 export default MovieDetails;

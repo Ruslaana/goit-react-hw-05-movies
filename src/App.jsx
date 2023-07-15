@@ -19,11 +19,11 @@ function App() {
       </nav>
 
         <Routes>
-        <Route exact path="/" component={Home} />
-          <Route exact path="/movies" component={Movies} />
-          <Route exact path="/movies/:movieId" component={MovieDetails} />
-          <Route exact path="/movies/:movieId/cast" component={Cast} />
-          <Route exact path="/movies/:movieId/reviews" component={Reviews} />
+        <Route exact path="/" element={Home} />
+          <Route exact path="/movies" element={Movies} />
+          <Route exact path="/movies/:movieId" element={MovieDetails} />
+          <Route exact path="/movies/:movieId/cast" element={Cast} />
+          <Route exact path="/movies/:movieId/reviews" element={Reviews} />
           <Route path="/" component={Home} />
         </Routes>
     </div>
