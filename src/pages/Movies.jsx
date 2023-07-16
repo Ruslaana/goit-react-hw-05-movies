@@ -23,13 +23,11 @@ const Movies = () => {
         setStartLoader(true);
 
         const data = await searchMovies(searchTerm);
-          
-        // All right 
+
         if (data.length) {
           toast.info(<span>Found movies with name {searchTerm}</span>)
         }
 
-        // not found
         if (!data.length) {
           return toast.warning(`Sorry movie('s) not found...`, {
           });
