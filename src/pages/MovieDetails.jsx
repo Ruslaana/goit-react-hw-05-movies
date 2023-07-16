@@ -1,5 +1,5 @@
 import React, { lazy, useEffect, useState } from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useParams } from 'react-router-dom';
 import {
   getMovieDetails,
   // getMovieCredits,
@@ -57,6 +57,9 @@ const MovieDetails = () => {
         <Route path="cast" element={<Cast />} />
         <Route path="reviews" element={<Reviews />} />
       </Routes>
+
+      <Link to='Cast'>Cast</Link>
+      <Link to='Reviews'>Rewies</Link>
       {/* <h2>Cast</h2>
       <ul>
         {cast.map((actor) => (

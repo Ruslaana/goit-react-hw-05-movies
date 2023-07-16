@@ -8,20 +8,22 @@ import MovieItem from 'components/MovieItem/MovieItem';
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
-  const [startLoader, setStartLoader ] = useState(false);
+  const [startLoader, setStartLoader] = useState(false);
 
   useEffect(() => {
+
     if (!searchTerm) {
-      // setStartLoader(false);
+      setStartLoader(false);
       return;
     }
 
-    const getImagesFromAPI = () => {
+    const getImagesFromAPI = async () => {
+      
       try {
         setStartLoader(true);
 
-        const data = searchMovies(searchTerm);
-        console.log(searchTerm)
+        const data = await searchMovies(searchTerm);
+          
         // All right 
         if (data.length) {
           toast.info(<span>Found movies with name {searchTerm}</span>)
@@ -33,7 +35,7 @@ const Movies = () => {
           });
         }
 
-        setMovies(prevImages => [...prevImages, ...data]);
+        setMovies(data);
 
       } catch (error) {
         console.log(error);
@@ -57,8 +59,7 @@ const Movies = () => {
         <input
           name='search'
           type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          defaultValue={searchTerm}
         />
         <button type="submit">Search</button>
       </form>

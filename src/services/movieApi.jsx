@@ -4,25 +4,25 @@ const API_KEY = 'a1f5b9e9409662faaf8dea1424605128';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWY1YjllOTQwOTY2MmZhYWY4ZGVhMTQyNDYwNTEyOCIsInN1YiI6IjY0YWU2YjUwNjZhMGQzMDEzYTc0ZDQ2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.K0sogxs4DauKrsrU3S5qyHUHTsR5OwOW6huAEekTRIc'
 
-export function searchMovies(searchTerm) {
-const options = {
-  method: 'GET',
-  url: `${BASE_URL}/search/movie`,
-  params: {query: searchTerm},
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${TOKEN}`,
-  }
-};
+export async function  searchMovies(searchTerm) {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/search/movie`,
+    params: { query: searchTerm },
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${TOKEN}`,
+    }
+  };
 
-  axios
-  .request(options)
-  .then(function (response) {
+  try {
+    const response = await axios.get(`${BASE_URL}/search/movie`, options );
     return response.data.results;
-  })
-  .catch(function (error) {
-    console.error(error);
-  });
+  } catch (error) {
+    console.error('Error getting trending movies:', error);
+    return [];
+  }
+  
 }
 
 export async function getTrendingMovies() {
