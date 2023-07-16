@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieDetails, getMovieCredits, getMovieReviews } from '../services/movieApi';
-import CastItem from '../components/CastItem/CastItem';
+import CastItem from './CastItem';
 
 const MovieDetails = ({ match }) => {
   const { movieId } = match.params;
