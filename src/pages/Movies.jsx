@@ -1,25 +1,71 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { searchMovies } from '../services/movieApi';
-import MovieItem from '../components/MovieItem/MovieItem';
+import { toast } from 'react-toastify';
+import Loader from 'components/Loader/Loader';
+import MovieItem from 'components/MovieItem/MovieItem';
 
-const Movies = ({ searchTerm, searchResults, handleSearch, setSearchTerm }) => {
-  const handleClick = async () => {
-    const results = await searchMovies(searchTerm);
-    handleSearch(results);
+
+const Movies = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [startLoader, setStartLoader ] = useState(false);
+
+  useEffect(() => {
+    if (!searchTerm) {
+      // setStartLoader(false);
+      return;
+    }
+
+    const getImagesFromAPI = () => {
+      try {
+        setStartLoader(true);
+
+        const data = searchMovies(searchTerm);
+        console.log(searchTerm)
+        // All right 
+        if (data.length) {
+          toast.info(<span>Found movies with name {searchTerm}</span>)
+        }
+
+        // not found
+        if (!data.length) {
+          return toast.warning(`Sorry movie('s) not found...`, {
+          });
+        }
+
+        setMovies(prevImages => [...prevImages, ...data]);
+
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setStartLoader(false);
+      }
+    };
+
+    getImagesFromAPI();
+
+  }, [searchTerm])
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setSearchTerm(e.target.elements.search.value);
   };
 
   return (
     <div>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleClick}>Search</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          name='search'
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+      {startLoader && <Loader />}
 
       <ul>
-        {searchResults.map((movie) => (
+        {movies.map(movie => (
           <li key={movie.id}>
             <MovieItem movie={movie} />
           </li>
@@ -29,17 +75,5 @@ const Movies = ({ searchTerm, searchResults, handleSearch, setSearchTerm }) => {
   );
 };
 
-Movies.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
-  searchResults: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      release_date: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  handleSearch: PropTypes.func.isRequired,
-  setSearchTerm: PropTypes.func.isRequired,
-};
 
 export default Movies;

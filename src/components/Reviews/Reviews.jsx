@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { getMovieReviews } from '../services/movieApi';
+import { useParams } from 'react-router-dom';
 
-function Reviews({ match }) {
+import { getMovieReviews } from '../../services/movieApi';
+
+function Reviews() {
   const [reviews, setReviews] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
     const fetchMovieReviews = async () => {
       try {
-        const response = await getMovieReviews(match.params.movieId);
+        const response = await getMovieReviews(movieId);
         setReviews(response.results);
       } catch (error) {
         console.log(error);
@@ -15,7 +18,7 @@ function Reviews({ match }) {
     };
 
     fetchMovieReviews();
-  }, [match.params.movieId]);
+  }, [movieId]);
 
   return (
     <div>

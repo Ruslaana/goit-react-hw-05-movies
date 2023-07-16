@@ -1,44 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { getMovieDetails, getMovieCredits, getMovieReviews } from '../services/movieApi';
-import CastItem from './CastItem';
+import React, { lazy, useEffect, useState } from 'react';
+import { Route, Routes, useParams } from 'react-router-dom';
+import {
+  getMovieDetails,
+  // getMovieCredits,
+  // getMovieReviews,
+} from '../services/movieApi';
+// import CastItem from '../components/CastItem/CastItem';
 
-const MovieDetails = ({ match }) => {
-  const { movieId } = match.params;
+const Cast = lazy(() => import('../components/Cast/Cast'));
+const Reviews = lazy(() => import('../components/Reviews/Reviews'));
+
+const MovieDetails = () => {
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const [cast, setCast] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  // const [cast, setCast] = useState([]);
+  // const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
+
     const fetchMovieDetails = async () => {
       const movieDetails = await getMovieDetails(movieId);
       setMovie(movieDetails);
     };
 
-    const fetchMovieCast = async () => {
-      const movieCast = await getMovieCredits(movieId);
-      setCast(movieCast);
-    };
+    // const fetchMovieCast = async () => {
+    //   const movieCast = await getMovieCredits(movieId);
+    //   setCast(movieCast);
+    // };
 
-    const fetchMovieReviews = async () => {
-      const movieReviews = await getMovieReviews(movieId);
-      setReviews(movieReviews);
-    };
+    // const fetchMovieReviews = async () => {
+    //   const movieReviews = await getMovieReviews(movieId);
+    //   setReviews(movieReviews);
+    // };
 
     fetchMovieDetails();
-    fetchMovieCast();
-    fetchMovieReviews();
+    // fetchMovieCast();
+    // fetchMovieReviews();
   }, [movieId]);
 
-  if (!movie) {
-    return null;
-  }
+  // if (!movie) {
+  //   return null;
+  // }
 
   return (
     <div>
-      <h1>{movie.title}</h1>
-      <p>{movie.overview}</p>
+      {movie && (
+        <>
+          {' '}
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+        </>
+      )}
 
-      <h2>Cast</h2>
+      <Routes>
+        <Route path="cast" element={<Cast />} />
+        <Route path="reviews" element={<Reviews />} />
+      </Routes>
+      {/* <h2>Cast</h2>
       <ul>
         {cast.map((actor) => (
           <li key={actor.id}>
@@ -55,7 +74,7 @@ const MovieDetails = ({ match }) => {
             <p>Author: {review.author}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

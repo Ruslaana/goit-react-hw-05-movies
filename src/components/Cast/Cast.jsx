@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getMovieCredits } from '../services/movieApi';
+import { getMovieCredits } from '../../services/movieApi';
+import { useParams } from 'react-router-dom';
 
-function Cast({ match }) {
+function Cast() {
   const [cast, setCast] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
+    if (!movieId) return;
+
     const fetchMovieCredits = async () => {
       try {
-        const response = await getMovieCredits(match.params.movieId);
+        const response = await getMovieCredits(movieId);
         setCast(response.cast);
       } catch (error) {
         console.log(error);
@@ -15,13 +19,13 @@ function Cast({ match }) {
     };
 
     fetchMovieCredits();
-  }, [match.params.movieId]);
+  }, [movieId]);
 
   return (
     <div>
       <h2>Cast</h2>
       <ul>
-        {cast.map((actor) => (
+        {cast.map(actor => (
           <li key={actor.id}>{actor.name}</li>
         ))}
       </ul>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { getTrendingMovies } from '../services/movieApi';
 import MovieItem from '../components/MovieItem/MovieItem';
 
@@ -28,14 +27,5 @@ const Home = () => {
   );
 };
 
-Home.propTypes = {
-  movie: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      release_data: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
 
 export default Home;
