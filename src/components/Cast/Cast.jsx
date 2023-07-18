@@ -25,6 +25,7 @@ function Cast() {
     <div>
       <h2>Cast</h2>
       <ul >
+      {!cast?.length > 0 && <div>No cast</div>}
         {cast?.length > 0 && cast.map(actor => (
           <li key={actor.id}>{actor.name}
           {/* <p>Character: {actor.character_name}</p> */}

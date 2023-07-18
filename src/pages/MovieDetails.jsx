@@ -1,16 +1,13 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from '../services/movieApi';
-import Loader from 'components/Loader/Loader';
-
-// const Cast = lazy(() => import('../components/Cast/Cast'));
-// const Reviews = lazy(() => import('../components/Reviews/Reviews'));
+import Loader from '../components/Loader/Loader';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  const backLinkHref = useRef(location.state?.from ?? "/movies");
 
 
   useEffect(() => {
@@ -26,19 +23,18 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={backLinkHref}>Go back</Link>
+      <Link to={backLinkHref.current}>Go back</Link>
       {movie && (
-        <>
+        <div>
           <h1>{movie.title}</h1>
           <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
           <p>Release date: {movie.release_date}</p>
           <p>{movie.overview}</p>
-
-        </>
+        </div>
       )}
 
-      <Link to={"cast"}>Cast</Link>
-      <Link to={"reviews"}>Reviews</Link>
+      <Link state={{ from: location.state?.from ?? '/' }} to={"cast"}>Cast</Link>
+      <Link state={{ from: location.state?.from ?? '/' }} to={"reviews"}>Reviews</Link>
 
       <Suspense fallback={ <Loader /> }>
         <Outlet />

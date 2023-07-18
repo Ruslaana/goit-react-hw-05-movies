@@ -24,7 +24,8 @@ function Reviews() {
     <div>
       <h2>Reviews</h2>
       <ul>
-        {reviews.map((review) => (
+      {!reviews?.length > 0 && <div>No Reviews</div>}
+        {reviews?.length > 0 && reviews.map((review) => (
           <li key={review.id}>
             <p>{review.content}</p>
             <p>Author: {review.author}</p>
