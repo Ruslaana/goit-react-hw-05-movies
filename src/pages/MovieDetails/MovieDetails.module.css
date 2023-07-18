@@ -1,0 +1,44 @@
+.button{
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 4px 6px;
+  border-radius: 2px;
+  background-color: #38865e;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+  font-weight: 500;
+  min-width: 100px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.title{
+  font-weight: 500;
+  font-size: 34px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.paragraph{
+  font-weight: 600;
+  font-size: 22px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.text{
+  font-weight: 500;
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.cont_text{
+  display: flex;
+  gap: 20px;
+}

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { searchMovies } from '../services/movieApi';
 import { ToastContainer, toast } from 'react-toastify';
-import Loader from '../components/Loader/Loader';
-import MovieItem from '../components/MovieItem/MovieItem';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css'
+
+import { searchMovies } from '../../services/movieApi';
+import Loader from '../../components/Loader/Loader';
+import MovieItem from '../../components/MovieItem/MovieItem';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
+
+import styles from './Movies.module.css'
 
 
 const Movies = () => {
@@ -67,8 +70,9 @@ const Movies = () => {
           name='search'
           type="text"
           defaultValue={searchTerm}
+          className={styles.input}
         />
-        <button type="submit">Search</button>
+        <button className={styles.button} type="submit">Search</button>
       </form>
       {startLoader && <Loader />}
 

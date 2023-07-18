@@ -1,7 +1,9 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieDetails } from '../services/movieApi';
-import Loader from '../components/Loader/Loader';
+import { getMovieDetails } from '../../services/movieApi';
+import Loader from '../../components/Loader/Loader';
+
+import styles from './MovieDetails.module.css'
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -23,18 +25,20 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={backLinkHref.current}>Go back</Link>
+      <Link className={styles.button} to={backLinkHref.current}>Go back</Link>
       {movie && (
         <div>
-          <h1>{movie.title}</h1>
+          <h1 className={styles.title} >{movie.title}</h1>
+          <div className={styles.cont_text}>
           <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
-          <p>Release date: {movie.release_date}</p>
-          <p>{movie.overview}</p>
+          <p className={styles.paragraph} >Release date: {movie.release_date}</p>
+          <p className={styles.text} >{movie.overview}</p>
+          </div>
         </div>
       )}
 
-      <Link state={{ from: location.state?.from ?? '/' }} to={"cast"}>Cast</Link>
-      <Link state={{ from: location.state?.from ?? '/' }} to={"reviews"}>Reviews</Link>
+      <Link className={styles.button} state={{ from: location.state?.from ?? '/' }} to={"cast"}>Cast</Link>
+      <Link className={styles.button} state={{ from: location.state?.from ?? '/' }} to={"reviews"}>Reviews</Link>
 
       <Suspense fallback={ <Loader /> }>
         <Outlet />
