@@ -5,7 +5,7 @@ function CastItem ({ actor }) {
   return (
     <div>
       <h4>{actor.name}</h4>
-      <p>Character: {actor.character}</p>
+      <p>Character: {actor.character_name}</p>
     </div>
   );
 }

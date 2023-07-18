@@ -5,7 +5,6 @@ import {
   // getMovieCredits,
   // getMovieReviews,
 } from '../services/movieApi';
-// import CastItem from '../components/CastItem/CastItem';
 
 const Cast = lazy(() => import('../components/Cast/Cast'));
 const Reviews = lazy(() => import('../components/Reviews/Reviews'));
@@ -13,8 +12,6 @@ const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  // const [cast, setCast] = useState([]);
-  // const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     if (!movieId) return;
@@ -24,60 +21,28 @@ const MovieDetails = () => {
       setMovie(movieDetails);
     };
 
-    // const fetchMovieCast = async () => {
-    //   const movieCast = await getMovieCredits(movieId);
-    //   setCast(movieCast);
-    // };
-
-    // const fetchMovieReviews = async () => {
-    //   const movieReviews = await getMovieReviews(movieId);
-    //   setReviews(movieReviews);
-    // };
-
     fetchMovieDetails();
-    // fetchMovieCast();
-    // fetchMovieReviews();
   }, [movieId]);
-
-  // if (!movie) {
-  //   return null;
-  // }
 
   return (
     <div>
       {movie && (
         <>
-          {' '}
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
+          <p>Release Date:{movie.release_date}</p>
+          <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
+
         </>
       )}
 
       <Routes>
-        <Route path="cast" element={<Cast />} />
-        <Route path="reviews" element={<Reviews />} />
+        <Route path="/movies/:movieId/cast" element={<Cast />} />
+        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
       </Routes>
 
-      <Link to='Cast'>Cast</Link>
-      <Link to='Reviews'>Rewies</Link>
-      {/* <h2>Cast</h2>
-      <ul>
-        {cast.map((actor) => (
-          <li key={actor.id}>
-            <CastItem actor={actor} />
-          </li>
-        ))}
-      </ul>
-
-      <h2>Reviews</h2>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <p>{review.content}</p>
-            <p>Author: {review.author}</p>
-          </li>
-        ))}
-      </ul> */}
+      <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+      <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
     </div>
   );
 };

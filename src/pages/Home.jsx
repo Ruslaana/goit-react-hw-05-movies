@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTrendingMovies } from '../services/movieApi';
 import MovieItem from '../components/MovieItem/MovieItem';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [movie, setMovie] = useState([]);
@@ -18,9 +19,9 @@ const Home = () => {
       <h1>Popular Movies</h1>
       <ul>
         {movie.map((movie) => (
-          <li key={movie.id}>
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
             <MovieItem movie={movie} />
-          </li>
+          </Link>
         ))}
       </ul>
     </div>

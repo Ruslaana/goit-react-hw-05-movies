@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { searchMovies } from '../services/movieApi';
 import { toast } from 'react-toastify';
-import Loader from 'components/Loader/Loader';
-import MovieItem from 'components/MovieItem/MovieItem';
+import Loader from '../components/Loader/Loader';
+import MovieItem from '../components/MovieItem/MovieItem';
+import { Link } from 'react-router-dom';
 
 
 const Movies = () => {
@@ -65,9 +66,9 @@ const Movies = () => {
 
       <ul>
         {movies.map(movie => (
-          <li key={movie.id}>
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
             <MovieItem movie={movie} />
-          </li>
+          </Link>
         ))}
       </ul>
     </div>

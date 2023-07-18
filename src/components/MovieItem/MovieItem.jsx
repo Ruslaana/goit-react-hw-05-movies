@@ -7,8 +7,8 @@ function MovieItem ({movie}) {
   return (
     <div className={styles.MovieItem}>
       <h3>{movie.title}</h3>
-      <p>Release Date:{movie.release_data}</p>
-      <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
+      {/* <p>Release Date:{movie.release_date}</p> */}
+      {/* <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img> */}
     </div>
   );
 }
