@@ -1,17 +1,17 @@
-import React, { lazy, useEffect, useState } from 'react';
-import { Link, Route, Routes, useParams } from 'react-router-dom';
-import {
-  getMovieDetails,
-  // getMovieCredits,
-  // getMovieReviews,
-} from '../services/movieApi';
+import React, { Suspense, useEffect, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { getMovieDetails } from '../services/movieApi';
+import Loader from 'components/Loader/Loader';
 
-const Cast = lazy(() => import('../components/Cast/Cast'));
-const Reviews = lazy(() => import('../components/Reviews/Reviews'));
+// const Cast = lazy(() => import('../components/Cast/Cast'));
+// const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/";
+
 
   useEffect(() => {
     if (!movieId) return;
@@ -26,23 +26,23 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <Link to={backLinkHref}>Go back</Link>
       {movie && (
         <>
           <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-          <p>Release Date:{movie.release_date}</p>
           <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
+          <p>Release date: {movie.release_date}</p>
+          <p>{movie.overview}</p>
 
         </>
       )}
 
-      <Routes>
-        <Route path="/movies/:movieId/cast" element={<Cast />} />
-        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-      </Routes>
+      <Link to={"cast"}>Cast</Link>
+      <Link to={"reviews"}>Reviews</Link>
 
-      <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-      <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+      <Suspense fallback={ <Loader /> }>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
