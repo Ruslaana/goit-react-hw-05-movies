@@ -3,13 +3,15 @@ import { searchMovies } from '../services/movieApi';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../components/Loader/Loader';
 import MovieItem from '../components/MovieItem/MovieItem';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css'
 
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search");
+  const location = useLocation();
+
 
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
@@ -72,7 +74,7 @@ const Movies = () => {
 
       <ul>
         {movies.map(movie => (
-          <Link to={`/movies/${movie.id}`} key={movie.id}>
+          <Link to={`/movies/${movie.id}`} key={movie.id} state={{ from: location}}>
             <MovieItem movie={movie} />
           </Link>
         ))}
