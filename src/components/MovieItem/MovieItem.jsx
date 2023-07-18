@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './MovieItem.module.css'
 function MovieItem({ movie }) {
   return (
     <div>
-      <h3>{movie.title}</h3>
+      <p className={styles.Item}>{movie.title}</p>
     </div>
   );
 }

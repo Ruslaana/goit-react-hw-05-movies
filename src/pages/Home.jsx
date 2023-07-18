@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [movie, setMovie] = useState([]);
- const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
