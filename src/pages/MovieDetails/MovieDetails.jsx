@@ -31,8 +31,10 @@ const MovieDetails = () => {
           <h1 className={styles.title} >{movie.title}</h1>
           <div className={styles.cont_text}>
           <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
+          <div className={styles.p_cont}>
           <p className={styles.paragraph} >Release date: {movie.release_date}</p>
           <p className={styles.text} >{movie.overview}</p>
+          </div>
           </div>
         </div>
       )}

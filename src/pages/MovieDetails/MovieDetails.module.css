@@ -42,3 +42,8 @@
   display: flex;
   gap: 20px;
 }
+
+.p_cont{
+  display: inline;
+  margin-left: 20px;
+}

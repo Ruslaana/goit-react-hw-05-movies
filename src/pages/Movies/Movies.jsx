@@ -76,10 +76,11 @@ const Movies = () => {
       </form>
       {startLoader && <Loader />}
 
-      <ul>
+      <ul className={styles.container}>
         {movies.map(movie => (
-          <Link to={`/movies/${movie.id}`} key={movie.id} state={{ from: location}}>
+          <Link className={styles.title} to={`/movies/${movie.id}`} key={movie.id} state={{ from: location}}>
             <MovieItem movie={movie} />
+          <img alt={movie.title} src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}></img>
           </Link>
         ))}
       </ul>
